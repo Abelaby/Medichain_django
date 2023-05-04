@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <div class="mx-auto my-10 p-10 w-1/2">
+    <h1 class="text-3xl font-bold mb-4">Verify Token</h1>
+    
+    <form class="my-6" method="post" action="{% url 'auth_server:verify' %}">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="token_number">
+          Token Number
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="token_number" type="text" name="token_number" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="expiry_date">
+          Expiry Date
+        </label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="expiry_date" type="date" name="expiry_date" required>
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          Verify
+        </button>
+      </div>
+    </form>
+    {% if error %}
+      <p class="text-red-500 font-bold">{{ error }}</p>
+    {% elif token_valid %}
+      <a href="{% url 'auth_server:download_file' path='data.txt' %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer">Download</a>
+    {% endif %}
+  </div>
+{% endblock %}

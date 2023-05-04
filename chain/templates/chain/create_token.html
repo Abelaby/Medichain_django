@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <h1 class="text-2xl font-bold mb-8">Create Token</h1>
+  <form method="post" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+    {% csrf_token %}
+    <div class="mb-4">
+      {{ form.signature.label_tag }}
+      {{ form.signature }}
+    </div>
+    <div class="mb-4">
+      {{ form.receiver.label_tag }}
+      {{ form.receiver }}
+    </div>
+    <div class="mb-4">
+      {{ form.token.label_tag }}
+      {{ form.token }}
+    </div>
+    <div class="mb-4">
+      {{ form.expiry_date.label_tag }}
+      {{ form.expiry_date }}
+    </div>
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Create
+    </button>
+  </form>
+{% endblock %}

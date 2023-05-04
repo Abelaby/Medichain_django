@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block content %}
+  <div class="bg-gray-100">
+    <div class="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
+      <div class="px-4 sm:px-0">
+        <h1 class="text-3xl font-bold mb-8">Request List</h1>
+        {% if requests %}
+          <ul class="divide-y divide-gray-200">
+            {% for request in requests %}
+              <li class="py-4 flex justify-between items-center">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-gray-900 truncate">{{ request.Rqp_name }} - {{ request.Ds_name }} - {{ request.timestamp }}</p>
+                </div>
+                <div class="ml-4 flex-shrink-0">
+                  <a href="{% url 'chain:create_token'%}" class="px-3 py-1 border border-transparent text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Approve Request</a>
+                </div>
+              </li>
+            {% empty %}
+              <li class="py-4">
+                <p class="text-sm font-medium text-gray-900 truncate">No requests yet.</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-lg font-medium text-gray-900">No requests yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

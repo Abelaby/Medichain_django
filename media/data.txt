@@ -1,0 +1,10 @@
+Patient details
+
+
+
+bills
+MRI
+Medications
+ECG
+
+etc..

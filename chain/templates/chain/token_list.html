@@ -1,0 +1,31 @@
+{% extends 'chain/base.html' %}
+
+{% block title %}
+  Token List
+{% endblock %}
+
+{% block content %}
+  <h1>Token List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Signature</th>
+        <th>Receiver</th>
+        <th>Token</th>
+        <th>Expiry Date</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for token in tokens %}
+      <tr>
+        <td>{{ token.signature }}</td>
+        <td>{{ token.receiver }}</td>
+        <td>{{ token.token }}</td>
+        <td>{{ token.expiry_date }}</td>
+        <td>{{ token.created_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
