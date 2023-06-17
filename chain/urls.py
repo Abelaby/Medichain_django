@@ -8,6 +8,8 @@ urlpatterns = [
     path("request-list/", views.request_list, name="request_list"),
     path('', views.create_token, name='create_token'),
     path('tokens/', views.token_list, name='token_list'),
+    path('token-created/',views.token_created, name='token_created'),
+    path('request-sent',views.request_sent, name="request_sent"),
 
 ]
 

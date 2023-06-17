@@ -28,24 +28,24 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-''''
+"""'
 EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'dd266e9a9b9b78'
-EMAIL_HOST_PASSWORD = 'ae7219cb176d2e'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = '2525' 
-'''
+"""
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'medichain.io@gmail.com'
-EMAIL_HOST_PASSWORD = 'kcbiyshlmphamuuz'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL= '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Application definition
 
@@ -56,10 +56,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'core',
-    'parties',
-    'chain',
-    'auth_server',
+    "core",
+    "parties",
+    "chain",
+    "auth_server",
 ]
 
 MIDDLEWARE = [
@@ -146,7 +146,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-AUTH_USER_MODEL = 'parties.User'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
+AUTH_USER_MODEL = "parties.User"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

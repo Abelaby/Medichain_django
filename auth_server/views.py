@@ -1,14 +1,13 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render
 
 from django.utils import timezone
 from chain.models import Token
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 import os
 from django.conf import settings
-import mimetypes
 import os
-from django.conf import settings
-from django.http import HttpResponse, Http404
+from chain.views import contract
+
 
 
 def token_detail(request):
@@ -21,11 +20,30 @@ def token_detail(request):
         except Token.DoesNotExist:
             token_valid = False
             token = None
-        context = {
-            'token': token,
-            'token_valid': token_valid,
-            'error': 'Invalid token or expiry date. Please try again.' if not token_valid else None
-        }
+
+        if token_valid:
+            # Fetch the token using the getToken function of the contract instance
+            signature = token.signature
+            receiver = token.receiver
+            fetched_token = contract.functions.getToken(signature, receiver)
+
+            # Perform verification logic with the fetched_token
+            
+            # Add the verification result to the context dictionary
+            context = {
+                'token': token,
+                'token_valid': token_valid,
+                'fetched_token': fetched_token,
+                'error': None
+            }
+        else:
+            context = {
+                'token': token,
+                'token_valid': token_valid,
+                'fetched_token': None,
+                'error': 'Invalid token or expiry date. Please try again.'
+            }
+
         return render(request, 'auth_server/verify.html', context)
     else:
         return render(request, 'auth_server/verify.html')

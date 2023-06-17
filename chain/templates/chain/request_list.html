@@ -1,9 +1,11 @@
 {% extends 'core/base.html' %}
+
+{% block title %}View Requests{% endblock %}
 {% block content %}
   <div class="bg-gray-100">
     <div class="max-w-7xl mx-auto py-12 sm:px-6 lg:px-8">
       <div class="px-4 sm:px-0">
-        <h1 class="text-3xl font-bold mb-8">Request List</h1>
+        <h1 class="text-3xl font-bold mb-8">View requests</h1>
         {% if requests %}
           <ul class="divide-y divide-gray-200">
             {% for request in requests %}

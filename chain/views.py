@@ -14,7 +14,7 @@ from parties.models import User
 from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.views import View
-
+import random
 # web3 imports
 import json
 from web3 import Web3
@@ -202,7 +202,7 @@ def request_form(request):
         form = RequestForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("Request is send")
+            return redirect('chain:request_sent')
     else:
         form = RequestForm()
     return render(request, "chain/request_form.html", {"form": form})
@@ -241,8 +241,8 @@ def create_token(request):
             # Create a new Token object from the form data
             signature = form.cleaned_data['signature']
             receiver = form.cleaned_data['receiver']
-            token = form.cleaned_data['token']
-            expiry_date = form.cleaned_data['expiry_date']
+            token = str(random.randint(0, 9999))
+            expiry_date = form.cleaned_data['expiry_date_choice']
             user = User.objects.get(username=receiver)
             email = user.email
             token_obj = Token(signature=signature, receiver=receiver, token=token, expiry_date=expiry_date)
@@ -256,7 +256,7 @@ def create_token(request):
 			
             print("Transaction confirmed!")
             send_mail('Token is created', str(token_obj), 'settings.EMAIL_HOST_USER', [email])
-            return HttpResponse('Token is created')
+            return redirect('chain:token_created')
     else:
         form = TokenForm()
 
@@ -271,6 +271,11 @@ def token_list(request):
 
     return render(request, 'chain/token_list.html', context)
 
+def token_created(request):
+    return render(request, 'chain/token_created.html')
+
+def request_sent(request):
+    return render(request, 'chain/request_sent.html')
 
 
         
